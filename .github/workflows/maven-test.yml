@@ -1,0 +1,68 @@
+name: Java Maven CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up JDK
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+
+      # Step 3: Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 4: Set up Xvfb for GUI support
+      - name: Install Xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Run tests with virtual display
+        run: xvfb-run mvn test
+
+      # Step 5: Set up environment variables
+      - name: Load environment variables
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Using .env.test"
+            cp .env.test .env
+          elif [ -f .env.production ]; then
+            echo "Using .env.production"
+            cp .env.production .env
+          else
+            echo ".env file already exists, skipping copy"
+          fi
+
+      # Step 6: Build and Test with Maven
+      - name: Build and Test
+        run: mvn clean verify
+        env:
+          DISPLAY: ":99"
+
+      # Step 7: Upload JaCoCo report
+      - name: Upload JaCoCo Coverage Report
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/

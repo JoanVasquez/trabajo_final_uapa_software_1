@@ -1,0 +1,106 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Maven-specific files
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Eclipse-specific files
+*.launch
+.settings/
+.classpath
+.project
+
+# IDEA-specific files
+.idea/
+*.iml
+*.iws
+out/
+
+# NetBeans-specific files
+nbproject/private/
+build/
+nbbuild/
+dist/
+.nbm/
+*.nbm
+
+# VS Code-specific files
+.vscode/
+
+# Temporary files
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# OS-specific files
+*.bak
+*.tmp
+*.orig
+
+# Intellij IDEA Module cache
+.idea_modules/
+
+# Windows thumbnail cache
+Thumbs.db
+
+# macOS system files
+.DS_Store
+
+# Logs and temp files
+logs/
+*.log
+*.pid
+*.seed
+*.stacktrace
+
+# Temporary by-products
+*.tmp
+*.temp
+*.swp
+
+# JetBrains IDEs (IntelliJ IDEA)
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# Lombok config
+.lombok/
+
+# Gradle caches
+.gradle/
+build/
+.gradle/gradle.properties
+.gradle/kotlin/
+.gradle/gradle-wrapper/
+
+# Local Maven Repository
+.m2/
+
+# Environment files
+.env
+.env.test
+
+.update_branches.sh
