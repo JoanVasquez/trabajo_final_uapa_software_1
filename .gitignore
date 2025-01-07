@@ -101,6 +101,5 @@ build/
 
 # Environment files
 .env
-.env.test
 
 .update_branches.sh
